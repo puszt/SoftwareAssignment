@@ -125,10 +125,31 @@ public class BishopsModel {
 
 
 
+    public boolean isGoal(){
+        for(var piece : pieces){
+            var pieceType = piece.getType();
+            switch (pieceType){
+                case BLACK -> {
+                    if (piece.getPosition().row() != 4){
+                        return false;
+                    }
+                }
+                case WHITE -> {
+                    if (piece.getPosition().row() != 0){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+
     public static void main(String[] args) {
         BishopsModel model = new BishopsModel();
         System.out.println(model);
-        System.out.println(model.getPiecePosition(4));
+        model.move(4,Directions.DOWN_LEFT_ONE);
+        model.move(4,Directions.UP_RIGHT_ONE);
     }
 
 }

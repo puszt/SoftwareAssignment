@@ -1,0 +1,11 @@
+.selected{
+    -fx-background-color: IndianRed;
+}
+
+.selectable{
+    -fx-background-color: IndianRed;
+}
+
+.square:hover{
+    -fx-background-color: ghostwhite;
+}

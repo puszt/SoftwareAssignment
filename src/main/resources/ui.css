@@ -1,0 +1,11 @@
+.light{
+    -fx-background-color: linear-gradient(#ffce9e, #ffe5cc);
+}
+
+.dark{
+    -fx-background-color: linear-gradient(#d18b47, #d1a071);
+}
+
+.selected{
+    -fx-background-color: #253627;
+}
