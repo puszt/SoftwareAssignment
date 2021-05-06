@@ -26,6 +26,10 @@ public class Piece {
         return position.get();
     }
 
+    public String toString(){
+        return type.toString() + position.get().toString();
+    }
+
     public void moveTo(Direction direction){
         Position newPosition = position.get().moveTo(direction);
         position.set(newPosition);

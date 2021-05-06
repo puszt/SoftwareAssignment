@@ -1,6 +1,6 @@
 package bishops.model;
 
-public enum Directions {
+public enum Directions implements Direction{
 
     UP_LEFT_ONE(-1, -1),
     UP_LEFT_TWO(-2, -2),
