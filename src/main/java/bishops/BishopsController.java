@@ -3,7 +3,11 @@ package bishops;
 import bishops.model.*;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -12,9 +16,12 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
+import javafx.stage.Stage;
 import org.tinylog.Logger;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -135,6 +142,14 @@ public class BishopsController {
                 }
             }
         }
+    }
+
+    @FXML
+    private void onEnd(ActionEvent event) throws IOException{
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("/End.fxml"));
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     private void alterSelectionPhase() {

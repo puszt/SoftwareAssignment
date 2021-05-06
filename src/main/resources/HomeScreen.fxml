@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: linear-gradient(#ffce9e,#d18b47);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bishops.HomeScreenController">
+   <children>
+      <Text layoutX="80.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bishops">
+         <font>
+            <Font name="FreeSans Bold" size="61.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" startX="0.014423076923076924" startY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Button fx:id="newGame" layoutX="100.0" layoutY="156.0" mnemonicParsing="false" onAction="#onNewGame" prefHeight="50.0" prefWidth="200.0" text="New Game" />
+      <Button layoutX="100.0" layoutY="282.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Leaderboard" />
+      <Button fx:id="quit" onAction="#onQuit" layoutX="100.0" layoutY="383.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Quit" />
+      <TextField alignment="CENTER" layoutX="75.0" layoutY="226.0" prefWidth="250.0" promptText="Type your name here..." />
+   </children>
+</Pane>
