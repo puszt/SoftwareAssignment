@@ -136,6 +136,12 @@ public class BishopsController {
                     var pieceNumber = model.getPieceNumber(selected).getAsInt();
                     var direction = Directions.of(position.row() - selected.row(), position.col() - selected.col());
                     Logger.debug("Moving piece {} {} position", pieceNumber, direction);
+                    int i = 1;
+                    while (gameStateCount != modelStates.size()-1){
+                        int index = modelStates.size()-i;
+                        modelStates.remove(index);
+                        i++;
+                    }
                     model.move(pieceNumber, direction);
                     deselectSelectedPosition();
                     alterSelectionPhase();
@@ -336,7 +342,9 @@ public class BishopsController {
             Logger.error("There is no previous move");
         }
          gameStateCount--;
+        setSelectablePositions();
     }
+
 
     @FXML
     private void onNext(){
@@ -350,6 +358,7 @@ public class BishopsController {
             Logger.error("There is no next move");
         }
         gameStateCount++;
+        setSelectablePositions();
     }
 
     private void checkIsGoal() {
