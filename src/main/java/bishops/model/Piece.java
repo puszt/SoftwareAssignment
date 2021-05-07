@@ -26,6 +26,7 @@ public class Piece {
         return position.get();
     }
 
+
     public String toString(){
         return type.toString() + position.get().toString();
     }

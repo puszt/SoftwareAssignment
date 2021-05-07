@@ -4,12 +4,13 @@ import javafx.beans.property.ObjectProperty;
 
 import java.util.*;
 
-public class BishopsModel {
+public class BishopsModel{
 
     public static int HEIGHT = 5;
     public static int WIDTH = 4;
 
     private final Piece[] pieces;
+
 
     public BishopsModel() {
         this(new Piece(PieceType.BLACK, new Position(0,0)),
@@ -54,6 +55,7 @@ public class BishopsModel {
         return pieces[pieceNumber].getPosition();
     }
 
+
     public ObjectProperty<Position> positionProperty(int pieceNumber) {
         return pieces[pieceNumber].positionProperty();
     }
@@ -84,8 +86,9 @@ public class BishopsModel {
         return true;
     }
 
+
     public Set<Directions> getValidMoves(int pieceNumber){
-        EnumSet<Directions> validMoves = EnumSet.noneOf(Directions.class); // kipróbálni new enumsettel
+        EnumSet<Directions> validMoves = EnumSet.noneOf(Directions.class);
         for (var direction : Directions.values()){
             if (isValidMove(pieceNumber, direction)){
                 validMoves.add(direction);
@@ -102,6 +105,14 @@ public class BishopsModel {
         List<Position> positions = new ArrayList<>(pieces.length);
         for (var piece : pieces) {
             positions.add(piece.getPosition());
+        }
+        return positions;
+    }
+
+    public List<ObjectProperty<Position>> positionProperties(){
+        List<ObjectProperty<Position>> positions = new ArrayList<>(pieces.length);
+        for (var piece : pieces) {
+            positions.add(piece.positionProperty());
         }
         return positions;
     }
@@ -145,11 +156,26 @@ public class BishopsModel {
     }
 
 
+    public void restart(){
+        int blackColumns = 0;
+        int whiteColumns = 0;
+        for(var piece : pieces){
+            if (piece.getType() == PieceType.BLACK){
+                var position = new Position(0,blackColumns);
+                piece.positionProperty().set(position);
+                blackColumns++;
+            }else {
+                var position = new Position(4,whiteColumns);
+                piece.positionProperty().set(position);
+                whiteColumns++;
+            }
+        }
+    }
+
     public static void main(String[] args) {
         BishopsModel model = new BishopsModel();
         System.out.println(model);
         model.move(4,Directions.DOWN_LEFT_ONE);
         model.move(4,Directions.UP_RIGHT_ONE);
     }
-
 }

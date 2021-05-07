@@ -5,34 +5,30 @@ import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Shape;
-import javafx.stage.Stage;
 import org.tinylog.Logger;
 import javafx.scene.Node;
-import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class BishopsController {
 
-    private enum SelectionPhase{
+    private enum SelectionPhase {
         SELECT_FROM,
         SELECT_TO;
 
         public SelectionPhase alter() {
-            return switch (this){
+            return switch (this) {
                 case SELECT_FROM -> SELECT_TO;
                 case SELECT_TO -> SELECT_FROM;
             };
@@ -49,25 +45,42 @@ public class BishopsController {
 
     private BishopsModel model = new BishopsModel();
 
+    private List<List<Position>> modelStates = new ArrayList<>();
+
+    private int gameStateCount;
+
     @FXML
     private GridPane board;
 
     @FXML
-    private void initialize(){
+    private void initialize() {
         createBoard();
         createPieces();
         setSelectablePositions();
         showSelectablePositions();
+        gameStateCount = 0;
+        modelStates.add(model.getPiecePositions());
+    }
+
+    private void checkIsGoal() {
+        if (model.isGoal()) {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                System.out.println("Something went wrong");
+            }
+            Platform.exit();
+        }
     }
 
     private void createBoard() {
         for (int i = 0; i < board.getRowCount(); i++) {
             for (int j = 0; j < board.getColumnCount(); j++) {
                 var square = createSquare();
-                if((i + j) % 2 == 0){
-                    square.getStyleClass().add("light");
-                }else {
-                    square.getStyleClass().add("dark");
+                if ((i + j) % 2 == 0) {
+                    square.getStyleClass().add("modernLight");
+                } else {
+                    square.getStyleClass().add("modernDark");
                 }
                 board.add(square, j, i);
             }
@@ -81,7 +94,7 @@ public class BishopsController {
         return square;
     }
 
-    private Circle createCircle(){
+    private Circle createCircle() {
         var circle = new Circle(10);
         circle.setFill(Color.valueOf("#56855c"));
         return circle;
@@ -107,49 +120,39 @@ public class BishopsController {
     }
 
     @FXML
-    private void handleMouseClick(MouseEvent event){
+    private void handleMouseClick(MouseEvent event) {
         var square = (StackPane) event.getSource();
         var row = GridPane.getRowIndex(square);
         var col = GridPane.getColumnIndex(square);
-        var position =new Position(row, col);
+        var position = new Position(row, col);
         Logger.debug("Clicked on piece {}", position);
         handleClickOnSquare(position);
     }
 
     private void handleClickOnSquare(Position position) {
-        switch (selectionPhase){
+        switch (selectionPhase) {
             case SELECT_FROM -> {
-                if (selectablePositions.contains(position)){
+                if (selectablePositions.contains(position)) {
                     selectPosition(position);
                     alterSelectionPhase();
                 }
             }
             case SELECT_TO -> {
-                if (selectablePositions.contains(position)){
+                if (selectablePositions.contains(position)) {
                     var pieceNumber = model.getPieceNumber(selected).getAsInt();
-                    var direction = Directions.of(position.row() - selected.row(), position.col()- selected.col());
-                    Logger.debug("Moving piece {} {} position",pieceNumber, direction);
+                    var direction = Directions.of(position.row() - selected.row(), position.col() - selected.col());
+                    Logger.debug("Moving piece {} {} position", pieceNumber, direction);
                     model.move(pieceNumber, direction);
                     deselectSelectedPosition();
                     alterSelectionPhase();
-                    if (model.isGoal()){
-                        Platform.exit();
-                    }
-                }
-                else {
+                    gameStateCount++;
+                    modelStates.add(model.getPiecePositions());
+                } else {
                     deselectSelectedPosition();
                     alterSelectionPhase();
                 }
             }
         }
-    }
-
-    @FXML
-    private void onEnd(ActionEvent event) throws IOException{
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/End.fxml"));
-        stage.setScene(new Scene(root));
-        stage.show();
     }
 
     private void alterSelectionPhase() {
@@ -175,17 +178,17 @@ public class BishopsController {
     }
 
     private void hideSelectedPosition() {
-            var square = getSquare(selected);
-            square.getStyleClass().remove("selected");
+        var square = getSquare(selected);
+        square.getStyleClass().remove("selected");
     }
 
-    private void setSelectablePositions(){
+    private void setSelectablePositions() {
         selectablePositions.clear();
-        switch (selectionPhase){
+        switch (selectionPhase) {
             case SELECT_FROM -> selectablePositions.addAll(model.getPiecePositions());
             case SELECT_TO -> {
                 var pieceNumber = model.getPieceNumber(selected).getAsInt();
-                for (var direction : model.getValidMoves(pieceNumber)){
+                for (var direction : model.getValidMoves(pieceNumber)) {
                     selectablePositions.add(selected.moveTo(direction));
                 }
             }
@@ -193,8 +196,8 @@ public class BishopsController {
     }
 
     private void showSelectablePositions() {
-        switch (selectionPhase){
-            case SELECT_FROM ->{
+        switch (selectionPhase) {
+            case SELECT_FROM -> {
                 for (var selectablePosition : selectablePositions) {
                     var square = getSquare(selectablePosition);
                 }
@@ -229,11 +232,120 @@ public class BishopsController {
     }
 
 
-    private void piecePositionChange(ObservableValue<? extends Position> observable, Position oldPosition, Position newPosition){
-        Logger.debug("Move {} -> {}",oldPosition, newPosition);
+    private void piecePositionChange(ObservableValue<? extends Position> observable, Position oldPosition, Position newPosition) {
+        Logger.debug("Move {} -> {}", oldPosition, newPosition);
         StackPane oldSquare = getSquare(oldPosition);
         StackPane newSquare = getSquare(newPosition);
         newSquare.getChildren().addAll(oldSquare.getChildren());
         oldSquare.getChildren().clear();
+        checkIsGoal();
+    }
+
+    @FXML
+    private void onClassicView() {
+        int i = 0;
+        int j = 0;
+        for (var square : board.getChildren()) {
+            if (i % 4 == 0) {
+                i = 0;
+                j++;
+            }
+            square.getStyleClass().remove("modernLight");
+            square.getStyleClass().remove("modernDark");
+            square.getStyleClass().remove("classicLight");
+            square.getStyleClass().remove("classicDark");
+            if (j % 2 != 0) {
+                if (i % 2 == 0) {
+                    square.getStyleClass().add("classicLight");
+                } else {
+                    square.getStyleClass().add("classicDark");
+                }
+            } else {
+                if (i % 2 == 0) {
+                    square.getStyleClass().add("classicDark");
+                } else {
+                    square.getStyleClass().add("classicLight");
+                }
+            }i++;
+        }
+    }
+
+    @FXML
+    private void onModernView() {
+        {
+            int i = 0;
+            int j = 0;
+            for (var square : board.getChildren()) {
+                if (i % 4 == 0) {
+                    i = 0;
+                    j++;
+                }
+                square.getStyleClass().remove("classicLight");
+                square.getStyleClass().remove("classicDark");
+                square.getStyleClass().remove("modernLight");
+                square.getStyleClass().remove("modernDark");
+                if (j % 2 != 0) {
+                    if (i % 2 == 0) {
+                        square.getStyleClass().add("modernLight");
+                    } else {
+                        square.getStyleClass().add("modernDark");
+                    }
+                } else {
+                    if (i % 2 == 0) {
+                        square.getStyleClass().add("modernDark");
+                    } else {
+                        square.getStyleClass().add("modernLight");
+                    }
+                }i++;
+            }
+        }
+    }
+
+    @FXML
+    private void onNewGame(ActionEvent event) throws IOException{
+        model.restart();
+        modelStates.clear();
+        gameStateCount = 0;
+    }
+
+    @FXML
+    private void onQuitGame(){
+        Alert quit = new Alert(Alert.AlertType.CONFIRMATION);
+        quit.setTitle("Quit");
+        quit.setHeaderText("Are you sure you want to quit?");
+        quit.setContentText("All your previous results will be lost!");
+        Optional<ButtonType> result = quit.showAndWait();
+        if (result.get() == ButtonType.OK){
+            Logger.debug("Exiting...");
+            Platform.exit();
+        }
+    }
+
+    @FXML
+    private void onPrev(){
+        int i = 0;
+        try {
+            var loadedModel = modelStates.get(gameStateCount-1);
+            for (Position position : loadedModel){
+                model.positionProperty(i).set(position);
+                i++;
+            }} catch (IndexOutOfBoundsException e){
+            Logger.error("There is no previous move");
+        }
+         gameStateCount--;
+    }
+
+    @FXML
+    private void onNext(){
+        int i = 0;
+        try {
+            var loadedModel = modelStates.get(gameStateCount+1);
+            for (Position position : loadedModel){
+            model.positionProperty(i).set(position);
+            i++;
+        }} catch (IndexOutOfBoundsException e){
+            Logger.error("There is no next move");
+        }
+        gameStateCount++;
     }
 }
