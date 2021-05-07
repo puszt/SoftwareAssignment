@@ -43,11 +43,6 @@
                   <MenuItem mnemonicParsing="false" onAction="#onModernView" text="Modern" />
                </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
         </menus>
       </MenuBar>
       <Button alignment="CENTER" layoutX="260.0" layoutY="1.5" mnemonicParsing="false" onAction="#onPrev">

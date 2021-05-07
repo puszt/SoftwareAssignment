@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
@@ -23,7 +24,20 @@ public class HomeScreenController {
         stage.show();
     }
 
-    @FXML private void onQuit(ActionEvent event) throws IOException{
+    @FXML private void onQuit() throws IOException{
         Platform.exit();
+    }
+
+    @FXML
+    private void onAbout() throws IOException{
+        Alert about = new Alert(Alert.AlertType.INFORMATION);
+        about.setTitle("About");
+        about.setHeaderText("Bishops Application");
+        about.setContentText("""
+            Author: Roland Pusztai
+            Java version: %s, %s
+            JavaFX version: %s
+            """.formatted(System.getProperty("java.version"), System.getProperty("java.vendor"), System.getProperty("javafx.version")));
+        about.showAndWait();
     }
 }

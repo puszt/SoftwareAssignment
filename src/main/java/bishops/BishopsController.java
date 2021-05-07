@@ -64,11 +64,6 @@ public class BishopsController {
 
     private void checkIsGoal() {
         if (model.isGoal()) {
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                System.out.println("Something went wrong");
-            }
             Platform.exit();
         }
     }
@@ -303,9 +298,17 @@ public class BishopsController {
 
     @FXML
     private void onNewGame(ActionEvent event) throws IOException{
-        model.restart();
-        modelStates.clear();
-        gameStateCount = 0;
+        Alert newGame =new Alert(Alert.AlertType.CONFIRMATION);
+        newGame.setTitle("New Game");
+        newGame.setHeaderText("Are you sure you want to start a new game?");
+        newGame.setContentText("All your previous results will be lost!");
+        Optional<ButtonType> result = newGame.showAndWait();
+        if (result.get() == ButtonType.OK){
+            Logger.debug("Restarting...");
+            model.restart();
+            modelStates.clear();
+            gameStateCount = 0;
+        }
     }
 
     @FXML
