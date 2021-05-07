@@ -1,6 +1,6 @@
 # Bishops application
 
-This is an Apache Maven 3 project that I madeas an Assignment.
+This is an Apache Maven 3 project that I made as an Assignment.
 
 # Rules
 The rules are simple, at the start of the game, 4 black bishops are placed on the top, and 4 white bishops are placed on the bottom of a 4-by-5 chessboard. 
@@ -15,4 +15,4 @@ Special thanks to Dr. Péter Jeszenszky, whose repositories served as a base for
 
 [INBPM0420](https://github.com/INBPM0420/)
 
-[jeszy75](https://github.com/INBPM0420/)
+[jeszy75](https://github.com/jeszy75/)
