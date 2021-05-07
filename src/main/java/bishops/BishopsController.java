@@ -370,7 +370,7 @@ public class BishopsController {
         if (model.isGoal()) {
             HomeScreenController.highscore.setScore(gameStateCount);
             ClassLoader loader = BishopsController.class.getClassLoader();
-            String pathUrl = "jdbc:h2:tcp://localhost/"+loader.getResource("Highscores.mv.db").getPath();
+            String pathUrl = "jdbc:h2:file:"+loader.getResource("Highscores.mv.db").getPath();
             String url = pathUrl.substring(0,pathUrl.length()-6);
             Jdbi jdbi = Jdbi.create(url);
             try(Handle handle = jdbi.open()){
