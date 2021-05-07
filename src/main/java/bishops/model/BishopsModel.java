@@ -4,7 +4,7 @@ import javafx.beans.property.ObjectProperty;
 
 import java.util.*;
 
-public class BishopsModel implements Cloneable{
+public class BishopsModel{
 
     public static int HEIGHT = 5;
     public static int WIDTH = 4;
@@ -180,25 +180,6 @@ public class BishopsModel implements Cloneable{
 
     }
 
-    @Override
-    public BishopsModel clone(){
-        BishopsModel copy;
-        try {
-            copy = (BishopsModel) super.clone();
-        } catch (CloneNotSupportedException e){
-            throw new AssertionError();
-        }
-        copy.pieces = deepClone(pieces);
-        return copy;
-    }
-
-    private static Piece[] deepClone(Piece[] pieces) {
-        Piece[] copy = pieces.clone();
-        for (var i = 0; i < pieces.length; i++) {
-            copy[i] = pieces[i].clone();
-        }
-        return copy;
-    }
 
     public static void main(String[] args) {
         BishopsModel model = new BishopsModel();

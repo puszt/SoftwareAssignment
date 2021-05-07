@@ -279,5 +279,8 @@ class BishopsModelTest {
 
     @Test
     void restart() {
+        assertNotEquals(model1.getPiecePositions(),model3.getPiecePositions());
+        model3.restart();
+        assertEquals(model1.getPiecePositions(),model3.getPiecePositions());
     }
 }

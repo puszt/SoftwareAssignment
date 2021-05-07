@@ -4,7 +4,7 @@ import bishops.model.PieceType;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
-public class Piece implements Cloneable{
+public class Piece {
 
     private final PieceType type;
     private final ObjectProperty<Position> position = new SimpleObjectProperty<>();
@@ -36,15 +36,8 @@ public class Piece implements Cloneable{
         position.set(newPosition);
     }
 
-    @Override
-    public Piece clone(){
-        Piece copy;
-        try {
-            copy = (Piece) super.clone();
-        }catch (CloneNotSupportedException e){
-            throw new AssertionError();
-        }
-        return copy;
+    public static void main(String[] args) {
+        Piece piece = new Piece(PieceType.BLACK,new Position(0,0));
+        System.out.println(piece);
     }
-
 }
