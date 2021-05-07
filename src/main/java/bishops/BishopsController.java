@@ -17,6 +17,8 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.jdbi.v3.core.Handle;
+import org.jdbi.v3.core.Jdbi;
 import org.tinylog.Logger;
 import javafx.scene.Node;
 
@@ -367,14 +369,15 @@ public class BishopsController {
     private void onGoal() {
         if (model.isGoal()) {
             HomeScreenController.highscore.setScore(gameStateCount);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Congratulations");
-            alert.setHeaderText("Congratulations!");
-            alert.setContentText("""
-                    Name: %s
-                    Score: %s
-                    """.formatted(HomeScreenController.highscore.getName(),HomeScreenController.highscore.getScore()));
-            alert.showAndWait();
+            ClassLoader loader = BishopsController.class.getClassLoader();
+            String pathUrl = "jdbc:h2:tcp://localhost/"+loader.getResource("Highscores.mv.db").getPath();
+            String url = pathUrl.substring(0,pathUrl.length()-6);
+            Jdbi jdbi = Jdbi.create(url);
+            try(Handle handle = jdbi.open()){
+                var id = handle.createQuery("SELECT COUNT (*) FROM Highscores").mapTo(Integer.class).one()+1;
+                handle.execute("INSERT INTO Highscores VALUES (%s,'%s',%s)".formatted(id,HomeScreenController.highscore.getName(),HomeScreenController.highscore.getScore()));
+            }
+            Platform.exit();
         }
     }
 

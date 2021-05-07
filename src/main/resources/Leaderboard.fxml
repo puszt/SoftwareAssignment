@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: linear-gradient(#ffce9e,#d18b47);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="25.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scoreboard" textAlignment="CENTER">
+         <font>
+            <Font name="FreeSans Bold" size="61.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Label layoutX="15.0" layoutY="125.0" prefWidth="180.0" text="Label" />
+      <Label layoutX="15.0" layoutY="155.0" prefWidth="180.0" text="Label" />
+      <Label layoutX="15.0" layoutY="185.0" prefWidth="180.0" text="Label" />
+      <Label layoutX="15.0" layoutY="215.0" prefWidth="180.0" text="Label" />
+      <Label layoutX="15.0" layoutY="245.0" prefWidth="180.0" text="Label" />
+      <Label layoutX="15.0" layoutY="275.0" prefWidth="180.0" text="Label" />
+      <Label layoutX="15.0" layoutY="305.0" prefWidth="180.0" text="Label" />
+      <Label layoutX="15.0" layoutY="335.0" prefWidth="180.0" text="Label" />
+      <Label layoutX="15.0" layoutY="365.0" prefWidth="180.0" text="Label" />
+      <Label layoutX="15.0" layoutY="395.0" prefWidth="180.0" text="Label" />
+      <Label layoutX="268.0" layoutY="125.0" text="Label" />
+      <Label layoutX="268.0" layoutY="155.0" text="Label" />
+      <Label layoutX="268.0" layoutY="185.0" text="Label" />
+      <Label layoutX="268.0" layoutY="215.0" text="Label" />
+      <Label layoutX="268.0" layoutY="245.0" text="Label" />
+      <Label layoutX="268.0" layoutY="275.0" text="Label" />
+      <Label layoutX="268.0" layoutY="305.0" text="Label" />
+      <Label layoutX="268.0" layoutY="335.0" text="Label" />
+      <Label layoutX="268.0" layoutY="365.0" text="Label" />
+      <Label layoutX="268.0" layoutY="395.0" text="Label" />
+   </children>
+</Pane>

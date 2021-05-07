@@ -13,9 +13,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.jdbi.v3.core.Handle;
+import org.jdbi.v3.core.Jdbi;
 import org.tinylog.Logger;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeScreenController {
 
@@ -58,4 +62,31 @@ public class HomeScreenController {
             """.formatted(System.getProperty("java.version"), System.getProperty("java.vendor"), System.getProperty("javafx.version")));
         about.showAndWait();
     }
-}
+
+    @FXML
+    private void onLeaderboard() throws IOException{
+        List<Highscore> highscores = new ArrayList<>();
+        ClassLoader loader = BishopsController.class.getClassLoader();
+        String pathUrl = "jdbc:h2:tcp://localhost/"+loader.getResource("Highscores.mv.db").getPath();
+        String url = pathUrl.substring(0,pathUrl.length()-6);
+        Jdbi jdbi = Jdbi.create(url);
+        try (Handle handle = jdbi.open()){
+            var idCount = handle.createQuery("SELECT COUNT (*) FROM Highscores").mapTo(Integer.class).one();
+            for (int id = 1; id <= idCount; id++) {
+                var name = handle.createQuery("""
+                            WITH BS AS(SELECT ID,NAME,SCORE FROM HIGHSCORES ORDER BY SCORE)
+                            SELECT NAME FROM BS WHERE ID = %s
+                            """.formatted(id)).mapTo(String.class).one();
+                var score = handle.createQuery("""
+                            WITH BS AS(SELECT ID,NAME,SCORE FROM HIGHSCORES ORDER BY SCORE)
+                            SELECT SCORE FROM BS WHERE ID = %s
+                            """.formatted(id)).mapTo(Integer.class).one();
+                Highscore highscore = new Highscore();
+                highscore.setName(name);
+                highscore.setScore(score);
+                highscores.add(highscore);
+            }
+            }
+        highscores.stream().forEach(System.out::println);
+        }
+    }
