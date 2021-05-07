@@ -6,6 +6,19 @@
     <artifactId>bishops-boardgame</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
+    <developers>
+        <developer>
+            <name>Roland Pusztai</name>
+            <email>prolika99@gmail.com</email>
+            <organization>University of Debrecen</organization>
+            <roles>
+                <role>student</role>
+            </roles>
+        </developer>
+    </developers>
+    <scm>
+        <developerConnection>https://github.com/puszt/SoftwareAssignment</developerConnection>
+    </scm>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>16</maven.compiler.release>

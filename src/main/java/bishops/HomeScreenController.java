@@ -1,6 +1,7 @@
 package bishops;
 
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.tinylog.Logger;
 
@@ -16,6 +19,16 @@ import java.io.IOException;
 
 public class HomeScreenController {
 
+
+    @FXML
+    private TextField name;
+
+    public final static Highscore highscore = new Highscore();
+
+    @FXML
+    private void initialize(){
+        Bindings.bindBidirectional(name.textProperty(), highscore.nameProperty());
+    }
 
     @FXML
     private void onNewGame(ActionEvent event) throws IOException{

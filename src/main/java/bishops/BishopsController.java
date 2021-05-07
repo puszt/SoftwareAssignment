@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import bishops.HomeScreenController;
 
 public class BishopsController {
 
@@ -52,6 +53,8 @@ public class BishopsController {
     private List<List<Position>> modelStates = new ArrayList<>();
 
     private int gameStateCount;
+
+    private HomeScreenController homeScreenController;
 
     @FXML
     private GridPane board;
@@ -239,7 +242,7 @@ public class BishopsController {
         StackPane newSquare = getSquare(newPosition);
         newSquare.getChildren().addAll(oldSquare.getChildren());
         oldSquare.getChildren().clear();
-        checkIsGoal();
+        onGoal();
     }
 
     @FXML
@@ -361,17 +364,19 @@ public class BishopsController {
         setSelectablePositions();
     }
 
-    private void checkIsGoal() {
+    private void onGoal() {
         if (model.isGoal()) {
-            Platform.exit();
+            HomeScreenController.highscore.setScore(gameStateCount);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Congratulations");
+            alert.setHeaderText("Congratulations!");
+            alert.setContentText("""
+                    Name: %s
+                    Score: %s
+                    """.formatted(HomeScreenController.highscore.getName(),HomeScreenController.highscore.getScore()));
+            alert.showAndWait();
         }
     }
 
-    @FXML
-    private void onGoal(ActionEvent event) throws IOException{
-        Stage stage =(Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/End.fxml"));
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
+
 }
