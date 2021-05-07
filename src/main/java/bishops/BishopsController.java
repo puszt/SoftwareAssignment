@@ -5,6 +5,9 @@ import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
@@ -13,6 +16,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import org.tinylog.Logger;
 import javafx.scene.Node;
 
@@ -62,11 +66,6 @@ public class BishopsController {
         modelStates.add(model.getPiecePositions());
     }
 
-    private void checkIsGoal() {
-        if (model.isGoal()) {
-            Platform.exit();
-        }
-    }
 
     private void createBoard() {
         for (int i = 0; i < board.getRowCount(); i++) {
@@ -143,6 +142,7 @@ public class BishopsController {
                     gameStateCount++;
                     modelStates.add(model.getPiecePositions());
                 } else {
+                    Logger.debug("Deselecting piece");
                     deselectSelectedPosition();
                     alterSelectionPhase();
                 }
@@ -350,5 +350,19 @@ public class BishopsController {
             Logger.error("There is no next move");
         }
         gameStateCount++;
+    }
+
+    private void checkIsGoal() {
+        if (model.isGoal()) {
+            Platform.exit();
+        }
+    }
+
+    @FXML
+    private void onGoal(ActionEvent event) throws IOException{
+        Stage stage =(Stage) ((Node) event.getSource()).getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("/End.fxml"));
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }

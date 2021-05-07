@@ -4,12 +4,12 @@ import javafx.beans.property.ObjectProperty;
 
 import java.util.*;
 
-public class BishopsModel{
+public class BishopsModel implements Cloneable{
 
     public static int HEIGHT = 5;
     public static int WIDTH = 4;
 
-    private final Piece[] pieces;
+    private Piece[] pieces;
 
 
     public BishopsModel() {
@@ -29,12 +29,26 @@ public class BishopsModel{
     }
 
     private void checkPieces(Piece[] pieces){
+        if (pieces.length != 8){
+            throw new IllegalArgumentException();
+        }
         var seen = new HashSet<Position>();
+        int blackPieces = 0;
+        int whitePieces = 0;
         for (var piece : pieces){
-            if (! isOnBoard(piece.getPosition()) ||seen.contains(piece.getPosition())){
+            if (! isOnBoard(piece.getPosition()) || seen.contains(piece.getPosition())){
                 throw new IllegalArgumentException();
             }
+            if(piece.getType() == PieceType.BLACK){
+                blackPieces++;
+            }
+            if(piece.getType() == PieceType.WHITE){
+                whitePieces++;
+            }
             seen.add(piece.getPosition());
+        }
+        if (whitePieces != 4 || blackPieces != 4){
+            throw new IllegalArgumentException();
         }
     }
 
@@ -109,13 +123,6 @@ public class BishopsModel{
         return positions;
     }
 
-    public List<ObjectProperty<Position>> positionProperties(){
-        List<ObjectProperty<Position>> positions = new ArrayList<>(pieces.length);
-        for (var piece : pieces) {
-            positions.add(piece.positionProperty());
-        }
-        return positions;
-    }
 
     public OptionalInt getPieceNumber(Position position) {
         for (int i = 0; i < pieces.length; i++) {
@@ -170,12 +177,32 @@ public class BishopsModel{
                 whiteColumns++;
             }
         }
+
+    }
+
+    @Override
+    public BishopsModel clone(){
+        BishopsModel copy;
+        try {
+            copy = (BishopsModel) super.clone();
+        } catch (CloneNotSupportedException e){
+            throw new AssertionError();
+        }
+        copy.pieces = deepClone(pieces);
+        return copy;
+    }
+
+    private static Piece[] deepClone(Piece[] pieces) {
+        Piece[] copy = pieces.clone();
+        for (var i = 0; i < pieces.length; i++) {
+            copy[i] = pieces[i].clone();
+        }
+        return copy;
     }
 
     public static void main(String[] args) {
         BishopsModel model = new BishopsModel();
         System.out.println(model);
-        model.move(4,Directions.DOWN_LEFT_ONE);
-        model.move(4,Directions.UP_RIGHT_ONE);
+        System.out.println(model.getPiecePositions());
     }
 }
