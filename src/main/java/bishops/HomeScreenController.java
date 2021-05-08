@@ -73,14 +73,15 @@ public class HomeScreenController {
         Jdbi jdbi = Jdbi.create(url);
         try (Handle handle = jdbi.open()){
             var idCount = handle.createQuery("SELECT COUNT (*) FROM Highscores").mapTo(Integer.class).one();
-            for (int id = 1; id <= idCount; id++) {
+            idCount = (idCount < 11 ? idCount : 10);
+            for (int id = 0; id < idCount; id++) {
                 var name = handle.createQuery("""
                             WITH BS AS(SELECT ID,NAME,SCORE FROM HIGHSCORES ORDER BY SCORE LIMIT 10)
-                            SELECT NAME FROM BS WHERE ID = %s
+                            SELECT NAME FROM BS LIMIT 1 OFFSET %s
                             """.formatted(id)).mapTo(String.class).one();
                 var score = handle.createQuery("""
                             WITH BS AS(SELECT ID,NAME,SCORE FROM HIGHSCORES ORDER BY SCORE LIMIT 10)
-                            SELECT SCORE FROM BS WHERE ID = %s
+                            SELECT SCORE FROM BS LIMIT 1 OFFSET %s
                             """.formatted(id)).mapTo(Integer.class).one();
                 Highscore highscore = new Highscore();
                 highscore.setName(name);

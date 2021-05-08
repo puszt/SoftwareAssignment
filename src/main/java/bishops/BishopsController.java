@@ -8,8 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -17,6 +16,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.checkerframework.checker.units.qual.A;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
 import org.tinylog.Logger;
@@ -377,9 +377,49 @@ public class BishopsController {
                 var id = handle.createQuery("SELECT COUNT (*) FROM Highscores").mapTo(Integer.class).one()+1;
                 handle.execute("INSERT INTO Highscores VALUES (%s,'%s',%s)".formatted(id,HomeScreenController.highscore.getName(),HomeScreenController.highscore.getScore()));
             }
-            Platform.exit();
+            ButtonType quit = new ButtonType("Quit", ButtonBar.ButtonData.CANCEL_CLOSE);
+            ButtonType exit = new ButtonType("Exit to Main Menu", ButtonBar.ButtonData.OK_DONE);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION,
+                                "Your score is: %s".formatted(HomeScreenController.highscore.getScore()),
+                                quit,exit
+                                );
+            alert.initOwner(board.getScene().getWindow());
+            alert.setTitle("Congratulations!");
+            alert.setHeaderText("Congratulations, %s".formatted(HomeScreenController.highscore.getName()));
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == quit){
+                Platform.exit();
+            }else {
+                try {
+                    onExitToMainMenuAlert(alert);
+                }catch (IOException e){
+                    Logger.debug("Something went wrong");
+                }
+            }
         }
     }
 
+    @FXML
+    private void onExitToMainMenuAlert(Alert alert) throws IOException{
+        Stage stage = (Stage) alert.getOwner();
+        Parent root = FXMLLoader.load(getClass().getResource("/HomeScreen.fxml"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    @FXML
+    private void onExitToMainMenu(ActionEvent event) throws IOException{
+        Alert quit = new Alert(Alert.AlertType.CONFIRMATION);
+        quit.setTitle("Quit");
+        quit.setHeaderText("Are you sure you want to quit?");
+        quit.setContentText("All your previous results will be lost!");
+        Optional<ButtonType> result = quit.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            Stage stage = (Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("/HomeScreen.fxml"));
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+    }
 
 }
