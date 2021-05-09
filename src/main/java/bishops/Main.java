@@ -1,3 +1,4 @@
+// CHECKSTYLE:OFF
 package bishops;
 
 import javafx.application.Application;

@@ -1,3 +1,4 @@
+// CHECKSTYLE:OFF
 package bishops;
 
 import bishops.model.Highscore;
@@ -54,12 +55,14 @@ public class HomeScreenController {
         Platform.exit();
     }
 
+
     @FXML
     private void onAbout(ActionEvent event) throws IOException{
         Logger.debug("Click on About");
         Alert about = new Alert(Alert.AlertType.INFORMATION);
         about.setTitle("About");
         about.setHeaderText("Bishops Application");
+        //CHECKSTYLE:OFF
         about.setContentText("""
             Author: Roland Pusztai
             Java version: %s, %s
@@ -101,4 +104,5 @@ public class HomeScreenController {
         stage.show();
         Logger.debug("Click on leaderboard");
         }
+
     }
