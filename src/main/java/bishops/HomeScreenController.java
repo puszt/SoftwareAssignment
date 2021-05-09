@@ -36,6 +36,8 @@ public class HomeScreenController {
         highscoresList.clear();
     }
 
+
+
     @FXML
     private void onNewGame(ActionEvent event) throws IOException{
         Logger.debug("Click on New Game");
