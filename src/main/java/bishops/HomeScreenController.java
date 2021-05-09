@@ -15,6 +15,7 @@ import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
 import org.tinylog.Logger;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,14 +48,14 @@ public class HomeScreenController {
         stage.show();
     }
 
-    @FXML private void onQuit() throws IOException{
+    @FXML private void onQuit(ActionEvent event) throws IOException{
         Logger.debug("Click on Quit");
         Logger.debug("Exiting...");
         Platform.exit();
     }
 
     @FXML
-    private void onAbout() throws IOException{
+    private void onAbout(ActionEvent event) throws IOException{
         Logger.debug("Click on About");
         Alert about = new Alert(Alert.AlertType.INFORMATION);
         about.setTitle("About");
@@ -63,6 +64,9 @@ public class HomeScreenController {
             Author: Roland Pusztai
             Java version: %s, %s
             JavaFX version: %s
+            
+            Rules: 
+            Your task is to switch the positions of the black and white bishops,while only moving in diagonal lines, without stepping on a tile which is guarded by one of the other color's bishop.
             """.formatted(System.getProperty("java.version"), System.getProperty("java.vendor"), System.getProperty("javafx.version")));
         about.showAndWait();
     }
@@ -95,5 +99,6 @@ public class HomeScreenController {
         Parent root = FXMLLoader.load(getClass().getResource("/Leaderboard.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
+        Logger.debug("Click on leaderboard");
         }
     }

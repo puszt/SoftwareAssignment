@@ -14,8 +14,13 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
+import org.tinylog.Logger;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.ArrayList.*;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 public class LeaderboardController {
@@ -62,47 +67,16 @@ public class LeaderboardController {
     @FXML
     private Label score10;
 
+    private List<Label> names = new ArrayList<>();
+    private List<Label> scores = new ArrayList<>();
+
     @FXML
     private void initialize(){
-        if (HomeScreenController.highscoresList.size() > 0){
-            name1.setText(HomeScreenController.highscoresList.get(0).getName());
-            score1.setText(String.valueOf(HomeScreenController.highscoresList.get(0).getScore()));
-        }
-        if (HomeScreenController.highscoresList.size() > 1){
-            name2.setText(HomeScreenController.highscoresList.get(1).getName());
-            score2.setText(String.valueOf(HomeScreenController.highscoresList.get(1).getScore()));
-        }
-        if (HomeScreenController.highscoresList.size() > 2){
-            name3.setText(HomeScreenController.highscoresList.get(2).getName());
-            score3.setText(String.valueOf(HomeScreenController.highscoresList.get(2).getScore()));
-        }
-        if (HomeScreenController.highscoresList.size() > 3){
-            name4.setText(HomeScreenController.highscoresList.get(3).getName());
-            score4.setText(String.valueOf(HomeScreenController.highscoresList.get(3).getScore()));
-        }
-        if (HomeScreenController.highscoresList.size() > 4){
-            name5.setText(HomeScreenController.highscoresList.get(4).getName());
-            score5.setText(String.valueOf(HomeScreenController.highscoresList.get(4).getScore()));
-        }
-        if (HomeScreenController.highscoresList.size() > 5){
-            name6.setText(HomeScreenController.highscoresList.get(5).getName());
-            score6.setText(String.valueOf(HomeScreenController.highscoresList.get(5).getScore()));
-        }
-        if (HomeScreenController.highscoresList.size() > 6){
-            name7.setText(HomeScreenController.highscoresList.get(6).getName());
-            score7.setText(String.valueOf(HomeScreenController.highscoresList.get(6).getScore()));
-        }
-        if (HomeScreenController.highscoresList.size() > 7){
-            name8.setText(HomeScreenController.highscoresList.get(7).getName());
-            score8.setText(String.valueOf(HomeScreenController.highscoresList.get(7).getScore()));
-        }
-        if (HomeScreenController.highscoresList.size() > 8){
-            name9.setText(HomeScreenController.highscoresList.get(8).getName());
-            score9.setText(String.valueOf(HomeScreenController.highscoresList.get(8).getScore()));
-        }
-        if (HomeScreenController.highscoresList.size() > 9){
-            name10.setText(HomeScreenController.highscoresList.get(9).getName());
-            score10.setText(String.valueOf(HomeScreenController.highscoresList.get(9).getScore()));
+        Collections.addAll(names,name1,name2,name3,name4,name5,name6,name7,name8,name9,name10);
+        Collections.addAll(scores,score1,score2,score3,score4,score5,score6,score7,score8,score9,score10);
+        for (int i = 0; i < HomeScreenController.highscoresList.size(); i++) {
+            names.get(i).setText(HomeScreenController.highscoresList.get(i).getName());
+            scores.get(i).setText(String.valueOf(HomeScreenController.highscoresList.get(i).getScore()));
         }
     }
 
@@ -112,6 +86,7 @@ public class LeaderboardController {
         Parent root = FXMLLoader.load(getClass().getResource("/HomeScreen.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
+        Logger.debug("Click on Back");
     }
 
     @FXML
@@ -128,9 +103,15 @@ public class LeaderboardController {
             Jdbi jdbi = Jdbi.create(url);
             try (Handle handle = jdbi.open()) {
                 handle.execute("DELETE FROM HIGHSCORES");
-                HomeScreenController.highscoresList.clear();
-                initialize();
             }
+            HomeScreenController.highscoresList.clear();
+            for(var name:names){
+                name.setText("");
+            }
+            for(var score:scores){
+                score.setText("");
+            }
+            Logger.debug("Click on Reset Leaderboard");
         }
     }
 }

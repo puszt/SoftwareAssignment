@@ -272,8 +272,10 @@ public class BishopsController {
                 } else {
                     square.getStyleClass().add("classicLight");
                 }
-            }i++;
+            }
+            i++;
         }
+        Logger.debug("Click on classic view");
     }
 
     @FXML
@@ -305,6 +307,7 @@ public class BishopsController {
                 }i++;
             }
         }
+        Logger.debug("Click on modern view");
     }
 
     @FXML
@@ -337,17 +340,21 @@ public class BishopsController {
 
     @FXML
     private void onPrev(){
-        int i = 0;
-        try {
-            var loadedModel = modelStates.get(gameStateCount-1);
-            for (Position position : loadedModel){
-                model.positionProperty(i).set(position);
-                i++;
-            }} catch (IndexOutOfBoundsException e){
-            Logger.error("There is no previous move");
+        if (gameStateCount >= 0){
+            int i = 0;
+            try {
+                var loadedModel = modelStates.get(gameStateCount-1);
+                for (Position position : loadedModel){
+                    model.positionProperty(i).set(position);
+                    i++;
+                }} catch (IndexOutOfBoundsException e){
+                Logger.error("There is no previous move");
+            }
+            gameStateCount--;
+            setSelectablePositions();
+        }else {
+            gameStateCount = 0;
         }
-         gameStateCount--;
-        setSelectablePositions();
     }
 
 
@@ -389,6 +396,7 @@ public class BishopsController {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == quit){
                 Platform.exit();
+                Logger.debug("Exiting...");
             }else {
                 try {
                     onExitToMainMenuAlert(alert);
@@ -405,20 +413,22 @@ public class BishopsController {
         Parent root = FXMLLoader.load(getClass().getResource("/HomeScreen.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
+        Logger.debug("Click on exit to main menu");
     }
 
     @FXML
     private void onExitToMainMenu(ActionEvent event) throws IOException{
-        Alert quit = new Alert(Alert.AlertType.CONFIRMATION);
-        quit.setTitle("Quit");
-        quit.setHeaderText("Are you sure you want to quit?");
-        quit.setContentText("All your previous results will be lost!");
-        Optional<ButtonType> result = quit.showAndWait();
+        Alert exit = new Alert(Alert.AlertType.CONFIRMATION);
+        exit.setTitle("Exit to main menu");
+        exit.setHeaderText("Are you sure you want to exit to main menu?");
+        exit.setContentText("All your previous results will be lost!");
+        Optional<ButtonType> result = exit.showAndWait();
         if (result.get() == ButtonType.OK) {
             Stage stage = (Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow();
             Parent root = FXMLLoader.load(getClass().getResource("/HomeScreen.fxml"));
             stage.setScene(new Scene(root));
             stage.show();
+            Logger.debug("Click on exit to main menu");
         }
     }
 
