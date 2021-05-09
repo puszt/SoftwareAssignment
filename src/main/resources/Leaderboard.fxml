@@ -34,85 +34,85 @@
             </LinearGradient>
          </fill>
       </Text>
-      <Label fx:id="name1" layoutX="15.0" layoutY="125.0" prefWidth="180.0">
+      <Label fx:id="name1" layoutX="15.0" layoutY="118.0" prefWidth="180.0">
          <font>
-            <Font size="24.0" />
+            <Font name="Suruma" size="25.0" />
          </font></Label>
-      <Label fx:id="name2" layoutX="15.0" layoutY="155.0" prefWidth="180.0" textAlignment="RIGHT">
+      <Label fx:id="name2" layoutX="15.0" layoutY="155.0" prefWidth="180.0" textAlignment="JUSTIFY">
          <font>
-            <Font size="24.0" />
+            <Font name="Suruma" size="25.0" />
          </font></Label>
       <Label fx:id="name3" layoutX="15.0" layoutY="185.0" prefWidth="180.0" textAlignment="RIGHT">
          <font>
-            <Font size="24.0" />
+            <Font name="Suruma" size="25.0" />
          </font></Label>
       <Label fx:id="name4" layoutX="15.0" layoutY="215.0" prefWidth="180.0" textAlignment="RIGHT">
          <font>
-            <Font size="24.0" />
+            <Font name="Suruma" size="25.0" />
          </font></Label>
       <Label fx:id="name5" layoutX="15.0" layoutY="245.0" prefWidth="180.0" textAlignment="RIGHT">
          <font>
-            <Font size="24.0" />
+            <Font name="Suruma" size="25.0" />
          </font></Label>
       <Label fx:id="name6" layoutX="15.0" layoutY="275.0" prefWidth="180.0" textAlignment="RIGHT">
          <font>
-            <Font size="24.0" />
+            <Font name="Suruma" size="25.0" />
          </font></Label>
       <Label fx:id="name7" layoutX="15.0" layoutY="305.0" prefWidth="180.0" textAlignment="RIGHT">
          <font>
-            <Font size="24.0" />
+            <Font name="Suruma" size="25.0" />
          </font></Label>
       <Label fx:id="name8" layoutX="15.0" layoutY="335.0" prefWidth="180.0" textAlignment="RIGHT">
          <font>
-            <Font size="24.0" />
+            <Font name="Suruma" size="25.0" />
          </font></Label>
       <Label fx:id="name9" layoutX="15.0" layoutY="365.0" prefWidth="180.0" textAlignment="RIGHT">
          <font>
-            <Font size="24.0" />
+            <Font name="Suruma" size="25.0" />
          </font></Label>
       <Label fx:id="name10" layoutX="15.0" layoutY="395.0" prefWidth="180.0" textAlignment="RIGHT">
          <font>
-            <Font size="24.0" />
+            <Font name="Suruma" size="25.0" />
          </font></Label>
       <Label fx:id="score1" layoutX="268.0" layoutY="125.0">
          <font>
-            <Font size="24.0" />
+            <Font name="Mitra Mono" size="25.0" />
          </font></Label>
       <Label fx:id="score2" layoutX="268.0" layoutY="155.0">
          <font>
-            <Font size="24.0" />
+            <Font name="Mitra Mono" size="25.0" />
          </font></Label>
       <Label fx:id="score3" layoutX="268.0" layoutY="185.0">
          <font>
-            <Font size="24.0" />
+            <Font name="Mitra Mono" size="25.0" />
          </font></Label>
       <Label fx:id="score4" layoutX="268.0" layoutY="215.0">
          <font>
-            <Font size="24.0" />
+            <Font name="Mitra Mono" size="25.0" />
          </font></Label>
       <Label fx:id="score5" layoutX="268.0" layoutY="245.0">
          <font>
-            <Font size="24.0" />
+            <Font name="Mitra Mono" size="25.0" />
          </font></Label>
       <Label fx:id="score6" layoutX="268.0" layoutY="275.0">
          <font>
-            <Font size="24.0" />
+            <Font name="Mitra Mono" size="25.0" />
          </font></Label>
       <Label fx:id="score7" layoutX="268.0" layoutY="305.0">
          <font>
-            <Font size="24.0" />
+            <Font name="Mitra Mono" size="25.0" />
          </font></Label>
       <Label fx:id="score8" layoutX="268.0" layoutY="335.0">
          <font>
-            <Font size="24.0" />
+            <Font name="Mitra Mono" size="25.0" />
          </font></Label>
       <Label fx:id="score9" layoutX="268.0" layoutY="365.0">
          <font>
-            <Font size="24.0" />
+            <Font name="Mitra Mono" size="25.0" />
          </font></Label>
       <Label fx:id="score10" layoutX="268.0" layoutY="395.0">
          <font>
-            <Font size="24.0" />
+            <Font name="Mitra Mono" size="25.0" />
          </font></Label>
       <MenuBar prefWidth="400.0">
         <menus>
