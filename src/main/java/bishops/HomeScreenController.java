@@ -44,7 +44,7 @@ public class HomeScreenController {
     private void onNewGame(ActionEvent event) throws IOException{
         Logger.debug("Click on New Game");
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/ui.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Board.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
     }
