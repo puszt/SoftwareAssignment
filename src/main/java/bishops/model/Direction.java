@@ -1,7 +1,7 @@
 package bishops.model;
 
 /**
- * A java interface for the different {@code Directions}
+ * A java interface for the different {@code Directions}.
  */
 public interface Direction {
     /**

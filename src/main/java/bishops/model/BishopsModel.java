@@ -22,7 +22,7 @@ public class BishopsModel{
     private Piece[] pieces;
 
     /**
-     * Constructs a model with the starting {@code Positions}.
+     * Constructs a model with the {@code pieces} on the starting {@code Positions}.
      */
     public BishopsModel() {
         this(new Piece(PieceType.BLACK, new Position(0,0)),
@@ -35,7 +35,8 @@ public class BishopsModel{
                 new Piece(PieceType.WHITE, new Position(4,3)));
     }
     /**
-     * Constructs a model by giving the {@code positions} of the {@code pieces} one-by-one.
+     * Constructs a model by giving it's {@code pieces} one-by-one, in an {@code list}.
+     * @param pieces the {@code list} that contains the {@code pieces}.
      */
     public BishopsModel(Piece... pieces){
         checkPieces(pieces);
@@ -163,7 +164,7 @@ public class BishopsModel{
     }
 
     /**
-     * Moves a {@code piece} with a specific number by {@code direction}
+     * Moves a {@code piece} with a specific number by {@code direction}.
      * @param pieceNumber the number of the {@code piece} you want to move.
      * @param direction the direction you want to move the {@code piece} by.
      */
@@ -219,6 +220,7 @@ public class BishopsModel{
         }
         return true;
     }
+
 
     /**
      * Resets the board to it's initial state.

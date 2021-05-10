@@ -5,11 +5,11 @@ package bishops.model;
  */
 public enum PieceType {
     /**
-     * Black piece type
+     * Black piece type.
      */
     BLACK,
     /**
-     * White piece type
+     * White piece type.
      */
     WHITE
 }

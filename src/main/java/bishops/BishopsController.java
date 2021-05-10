@@ -361,17 +361,21 @@ public class BishopsController {
 
     @FXML
     private void onNext(){
-        int i = 0;
-        try {
-            var loadedModel = modelStates.get(gameStateCount+1);
-            for (Position position : loadedModel){
-            model.positionProperty(i).set(position);
-            i++;
-        }} catch (IndexOutOfBoundsException e){
-            Logger.error("There is no next move");
+        if (gameStateCount < modelStates.size()){
+            int i = 0;
+            try {
+                var loadedModel = modelStates.get(gameStateCount+1);
+                for (Position position : loadedModel){
+                    model.positionProperty(i).set(position);
+                    i++;
+                }} catch (IndexOutOfBoundsException e){
+                Logger.error("There is no next move");
+            }
+            gameStateCount++;
+            setSelectablePositions();
+        }else {
+            gameStateCount = modelStates.size()-1;
         }
-        gameStateCount++;
-        setSelectablePositions();
     }
 
     private void onGoal() {

@@ -16,7 +16,7 @@ import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
 import org.tinylog.Logger;
 
-import javax.swing.*;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +54,6 @@ public class HomeScreenController {
         Logger.debug("Exiting...");
         Platform.exit();
     }
-
 
     @FXML
     private void onAbout(ActionEvent event) throws IOException{

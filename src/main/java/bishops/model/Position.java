@@ -1,6 +1,8 @@
 package bishops.model;
 /**
- * Class for representing positions of the board
+ * Class for representing positions of the board.
+ * @param col the column of the {@code position} on the board.
+ * @param row the row of the {@code position} on the board.
  */
 public record Position(int row, int col) {
     /**

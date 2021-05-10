@@ -36,7 +36,7 @@ public class Highscore {
     }
 
     /**
-     * Returns the {@code name} of the player as a {@code StringProperty}
+     * Returns the {@code name} of the player as a {@code StringProperty}.
      * @return the name of the player.
      */
     public StringProperty nameProperty(){

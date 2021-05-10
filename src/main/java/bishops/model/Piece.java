@@ -9,7 +9,7 @@ import javafx.beans.property.SimpleObjectProperty;
  */
 public class Piece {
     /**
-     * The type of the piece
+     * The type of the piece.
      */
     private final PieceType type;
     /**

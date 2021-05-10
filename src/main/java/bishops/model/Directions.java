@@ -1,7 +1,7 @@
 package bishops.model;
 
 /**
- * {@code Directions} that can be used
+ * {@code Directions} that can be used.
  */
 public enum Directions implements Direction{
     /**
@@ -53,18 +53,18 @@ public enum Directions implements Direction{
      */
     DOWN_RIGHT_THREE(3,3);
     /**
-     * The change of the {@code row} after moving a {@code direction}
+     * The change of the {@code row} after moving a {@code direction}.
      */
     private final int rowChange;
     /**
-     * The change of the {@code col} after moving a {@code direction}
+     * The change of the {@code col} after moving a {@code direction}.
      */
     private final int colChange;
 
     /**
      * Constructs a {@code direction}.
-     * @param rowChange the change of the {@code row} after moving a {@code direction}
-     * @param colChange the change of the {@code col} after moving a {@code direction}
+     * @param rowChange the change of the {@code row} after moving a {@code direction}.
+     * @param colChange the change of the {@code col} after moving a {@code direction}.
      */
     Directions(int rowChange, int colChange){
         this.rowChange = rowChange;
