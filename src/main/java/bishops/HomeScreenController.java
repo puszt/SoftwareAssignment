@@ -71,6 +71,7 @@ public class HomeScreenController {
             Your task is to switch the positions of the black and white bishops,while only moving in diagonal lines, without stepping on a tile which is guarded by one of the other color's bishop.
             """.formatted(System.getProperty("java.version"), System.getProperty("java.vendor"), System.getProperty("javafx.version")));
         about.showAndWait();
+        Logger.debug("Click");
     }
 
     @FXML

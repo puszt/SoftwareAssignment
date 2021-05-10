@@ -92,9 +92,10 @@ public class LeaderboardController {
 
     @FXML
     private void onResetLeaderboard(ActionEvent event) throws IOException {
+        Logger.debug("Click on Reset Leaderboard");
         Alert quit = new Alert(Alert.AlertType.CONFIRMATION);
-        quit.setTitle("Quit");
-        quit.setHeaderText("Are you sure you want to quit?");
+        quit.setTitle("Reset Leaderboard");
+        quit.setHeaderText("Are you sure you want to reset the leaderboard?");
         quit.setContentText("All your previous results will be lost!");
         Optional<ButtonType> result = quit.showAndWait();
         if (result.get() == ButtonType.OK) {
@@ -112,7 +113,9 @@ public class LeaderboardController {
             for(var score:scores){
                 score.setText("");
             }
-            Logger.debug("Click on Reset Leaderboard");
+            Logger.debug("Click on OK");
+        }else {
+            Logger.debug("Click on cancel");
         }
     }
 }

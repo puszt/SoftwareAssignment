@@ -17,7 +17,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import org.checkerframework.checker.units.qual.A;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
 import org.tinylog.Logger;
@@ -354,6 +353,7 @@ public class BishopsController {
             gameStateCount = 0;
             Logger.error("There is no previous move");
         }
+        Logger.debug("Click on Previous");
     }
 
 
@@ -372,6 +372,7 @@ public class BishopsController {
             gameStateCount = modelStates.size()-1;
             Logger.error("There is no next move");
         }
+        Logger.debug("Click on Next");
     }
 
     private void onGoal() {
