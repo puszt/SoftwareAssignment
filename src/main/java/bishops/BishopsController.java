@@ -28,6 +28,8 @@ import java.util.List;
 import java.util.Optional;
 import bishops.HomeScreenController;
 
+import static bishops.DatabaseController.getJdbiDatabasePath;
+
 public class BishopsController {
 
     private enum SelectionPhase {
@@ -378,10 +380,7 @@ public class BishopsController {
     private void onGoal() {
         if (model.isGoal()) {
             HomeScreenController.highscore.setScore(gameStateCount);
-            ClassLoader loader = BishopsController.class.getClassLoader();
-            String pathUrl = "jdbc:h2:file:"+loader.getResource("Highscores.mv.db").getPath();
-            String url = pathUrl.substring(0,pathUrl.length()-6);
-            Jdbi jdbi = Jdbi.create(url);
+            Jdbi jdbi = Jdbi.create(getJdbiDatabasePath());
             try(Handle handle = jdbi.open()){
                 var id = handle.createQuery("SELECT COUNT (*) FROM Highscores").mapTo(Integer.class).one()+1;
                 handle.execute("INSERT INTO Highscores VALUES (%s,'%s',%s)".formatted(id,HomeScreenController.highscore.getName(),HomeScreenController.highscore.getScore()));

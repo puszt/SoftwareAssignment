@@ -24,6 +24,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import static bishops.DatabaseController.getJdbiDatabasePath;
+
 public class LeaderboardController {
     private HomeScreenController homeScreenController;
 
@@ -99,10 +101,7 @@ public class LeaderboardController {
         quit.setContentText("All your previous results will be lost!");
         Optional<ButtonType> result = quit.showAndWait();
         if (result.get() == ButtonType.OK) {
-            ClassLoader loader = BishopsController.class.getClassLoader();
-            String pathUrl = "jdbc:h2:file:" + loader.getResource("Highscores.mv.db").getPath();
-            String url = pathUrl.substring(0, pathUrl.length() - 6);
-            Jdbi jdbi = Jdbi.create(url);
+            Jdbi jdbi = Jdbi.create(getJdbiDatabasePath());
             try (Handle handle = jdbi.open()) {
                 handle.execute("DELETE FROM HIGHSCORES");
             }

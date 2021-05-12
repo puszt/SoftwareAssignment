@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static bishops.DatabaseController.getJdbiDatabasePath;
+
 public class HomeScreenController {
 
 
@@ -76,10 +78,7 @@ public class HomeScreenController {
 
     @FXML
     private void onLeaderboard(ActionEvent event) throws IOException{
-        ClassLoader loader = BishopsController.class.getClassLoader();
-        String pathUrl = "jdbc:h2:file:"+loader.getResource("Highscores.mv.db").getPath();
-        String url = pathUrl.substring(0,pathUrl.length()-6);
-        Jdbi jdbi = Jdbi.create(url);
+        Jdbi jdbi = Jdbi.create(getJdbiDatabasePath());
         try (Handle handle = jdbi.open()){
             var idCount = handle.createQuery("SELECT COUNT (*) FROM Highscores").mapTo(Integer.class).one();
             idCount = (idCount < 11 ? idCount : 10);
