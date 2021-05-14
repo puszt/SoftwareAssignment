@@ -1,6 +1,7 @@
 package bishops.model;
 
 import javafx.beans.property.ObjectProperty;
+import java.util.Optional;
 
 import java.util.*;
 
@@ -135,12 +136,29 @@ public class BishopsModel{
                 return false;
             }
         }
-        for (var guardedDirection : Directions.values()){
-            Position guardedPosition = newPosition.moveTo(guardedDirection);
+        for (var checkDirection : Directions.values()){
+            Position checkPosition = newPosition.moveTo(checkDirection);
             for(var piece : pieces){
-                if(piece.getPosition().equals(guardedPosition)){
+                if(piece.getPosition().equals(checkPosition)){
                     if (piece.getType() != pieces[pieceNumber].getType()){
                         return false;
+                    }
+                }
+            }
+        }
+        for (var reverseDirection : Directions.values()){
+            if (Math.signum(reverseDirection.getRowChange()) == Math.signum(direction.getRowChange()) ||
+                    Math.signum(reverseDirection.getColChange()) == Math.signum(direction.getColChange())){
+                continue;
+            }else {
+                Position reversePosition = newPosition.moveTo(reverseDirection);
+                for(var piece : pieces){
+                    if(piece.getPosition().equals(reversePosition)){
+                        if (piece != pieces[pieceNumber]){
+                            return false;
+                        }else {
+                            return true;
+                        }
                     }
                 }
             }
@@ -254,6 +272,4 @@ public class BishopsModel{
         }
         return joiner.toString();
     }
-
-
 }

@@ -63,7 +63,6 @@ public class HomeScreenController {
         Alert about = new Alert(Alert.AlertType.INFORMATION);
         about.setTitle("About");
         about.setHeaderText("Bishops Application");
-        //CHECKSTYLE:OFF
         about.setContentText("""
             Author: Roland Pusztai
             Java version: %s, %s

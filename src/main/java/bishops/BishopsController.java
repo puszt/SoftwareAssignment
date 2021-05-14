@@ -90,15 +90,8 @@ public class BishopsController {
 
     private StackPane createSquare() {
         var square = new StackPane();
-        square.getStyleClass().add("square");
         square.setOnMouseClicked(this::handleMouseClick);
         return square;
-    }
-
-    private Circle createCircle() {
-        var circle = new Circle(10);
-        circle.setFill(Color.valueOf("#56855c"));
-        return circle;
     }
 
     private void createPieces() {
@@ -143,12 +136,7 @@ public class BishopsController {
                     var pieceNumber = model.getPieceNumber(selected).getAsInt();
                     var direction = Directions.of(position.row() - selected.row(), position.col() - selected.col());
                     Logger.debug("Moving piece {} {} position", pieceNumber, direction);
-                    int i = 1;
-                    while (gameStateCount != modelStates.size()-1){
-                        int index = modelStates.size()-i;
-                        modelStates.remove(index);
-                        i++;
-                    }
+                    trimModelStates();
                     model.move(pieceNumber, direction);
                     deselectSelectedPosition();
                     alterSelectionPhase();
@@ -180,6 +168,13 @@ public class BishopsController {
         square.getStyleClass().add("selected");
     }
 
+    private void trimModelStates(){
+        while (gameStateCount != modelStates.size()-1){
+            int index = modelStates.size()-1;
+            modelStates.remove(index);
+        }
+    }
+
     private void deselectSelectedPosition() {
         hideSelectedPosition();
         selected = null;
@@ -204,24 +199,22 @@ public class BishopsController {
     }
 
     private void showSelectablePositions() {
-        switch (selectionPhase) {
-            case SELECT_FROM -> {
-                for (var selectablePosition : selectablePositions) {
-                    var square = getSquare(selectablePosition);
-                }
-            }
-            case SELECT_TO -> {
-                for (var selectablePosition : selectablePositions) {
-                    var square = getSquare(selectablePosition);
-                    var circle = createCircle();
-                    square.getChildren().add(circle);
-                    circleNodes.add(circle);
-                }
+        if (selectionPhase == SelectionPhase.SELECT_TO){
+            for (var selectablePosition : selectablePositions) {
+                var square = getSquare(selectablePosition);
+                var circle = createCircle();
+                square.getChildren().add(circle);
+                circleNodes.add(circle);
             }
         }
 
     }
 
+    private Circle createCircle() {
+        var circle = new Circle(10);
+        circle.setFill(Color.valueOf("#56855c"));
+        return circle;
+    }
     private void hideSelectablePositions() {
         for (var selectablePosition : selectablePositions) {
             var square = getSquare(selectablePosition);
