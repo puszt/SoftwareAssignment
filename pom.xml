@@ -17,6 +17,9 @@
         </developer>
     </developers>
     <description>An Apache Maven 3 project for my university course</description>
+    <scm>
+        <developerConnection>scm:git:https://github.com/puszt/SoftwareAssignment.git</developerConnection>
+    </scm>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>16</maven.compiler.release>
@@ -51,18 +54,6 @@
             <groupId>org.tinylog</groupId>
             <artifactId>tinylog-impl</artifactId>
             <version>${tinylog.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.xml.bind</groupId>
-            <artifactId>jakarta.xml.bind-api</artifactId>
-            <version>3.0.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jaxb</groupId>
-            <artifactId>jaxb-runtime</artifactId>
-            <version>3.0.0</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
