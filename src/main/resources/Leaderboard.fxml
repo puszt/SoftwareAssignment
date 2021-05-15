@@ -13,6 +13,11 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="527.0" prefWidth="400.0" style="-fx-background-color: linear-gradient(#ffce9e,#d18b47);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bishops.LeaderboardController">
    <children>
+      <Text layoutX="-26.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" x="40.0">
+         <font>
+            <Font name="Suruma" size="28.0" />
+         </font>
+      </Text>
       <Text layoutX="25.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Leaderboard" textAlignment="CENTER">
          <font>
             <Font name="FreeSans Bold" size="55.0" />
@@ -34,83 +39,83 @@
             </LinearGradient>
          </fill>
       </Text>
-      <Label fx:id="name1" layoutX="15.0" layoutY="118.0" prefWidth="180.0">
+      <Label fx:id="name1" layoutX="14.0" layoutY="143.0" prefWidth="180.0">
          <font>
             <Font name="Suruma" size="25.0" />
          </font></Label>
-      <Label fx:id="name2" layoutX="15.0" layoutY="155.0" prefWidth="180.0" textAlignment="JUSTIFY">
+      <Label fx:id="name2" layoutX="14.0" layoutY="180.0" prefWidth="180.0" textAlignment="JUSTIFY">
          <font>
             <Font name="Suruma" size="25.0" />
          </font></Label>
-      <Label fx:id="name3" layoutX="15.0" layoutY="185.0" prefWidth="180.0" textAlignment="RIGHT">
+      <Label fx:id="name3" layoutX="14.0" layoutY="210.0" prefWidth="180.0" textAlignment="RIGHT">
          <font>
             <Font name="Suruma" size="25.0" />
          </font></Label>
-      <Label fx:id="name4" layoutX="15.0" layoutY="215.0" prefWidth="180.0" textAlignment="RIGHT">
+      <Label fx:id="name4" layoutX="14.0" layoutY="240.0" prefWidth="180.0" textAlignment="RIGHT">
          <font>
             <Font name="Suruma" size="25.0" />
          </font></Label>
-      <Label fx:id="name5" layoutX="15.0" layoutY="245.0" prefWidth="180.0" textAlignment="RIGHT">
+      <Label fx:id="name5" layoutX="14.0" layoutY="270.0" prefWidth="180.0" textAlignment="RIGHT">
          <font>
             <Font name="Suruma" size="25.0" />
          </font></Label>
-      <Label fx:id="name6" layoutX="15.0" layoutY="275.0" prefWidth="180.0" textAlignment="RIGHT">
+      <Label fx:id="name6" layoutX="14.0" layoutY="300.0" prefWidth="180.0" textAlignment="RIGHT">
          <font>
             <Font name="Suruma" size="25.0" />
          </font></Label>
-      <Label fx:id="name7" layoutX="15.0" layoutY="305.0" prefWidth="180.0" textAlignment="RIGHT">
+      <Label fx:id="name7" layoutX="14.0" layoutY="330.0" prefWidth="180.0" textAlignment="RIGHT">
          <font>
             <Font name="Suruma" size="25.0" />
          </font></Label>
-      <Label fx:id="name8" layoutX="15.0" layoutY="335.0" prefWidth="180.0" textAlignment="RIGHT">
+      <Label fx:id="name8" layoutX="14.0" layoutY="360.0" prefWidth="180.0" textAlignment="RIGHT">
          <font>
             <Font name="Suruma" size="25.0" />
          </font></Label>
-      <Label fx:id="name9" layoutX="15.0" layoutY="365.0" prefWidth="180.0" textAlignment="RIGHT">
+      <Label fx:id="name9" layoutX="14.0" layoutY="390.0" prefWidth="180.0" textAlignment="RIGHT">
          <font>
             <Font name="Suruma" size="25.0" />
          </font></Label>
-      <Label fx:id="name10" layoutX="15.0" layoutY="395.0" prefWidth="180.0" textAlignment="RIGHT">
+      <Label fx:id="name10" layoutX="14.0" layoutY="420.0" prefWidth="180.0" textAlignment="RIGHT">
          <font>
             <Font name="Suruma" size="25.0" />
          </font></Label>
-      <Label fx:id="score1" layoutX="268.0" layoutY="125.0">
+      <Label fx:id="score1" layoutX="267.0" layoutY="150.0">
          <font>
             <Font name="Mitra Mono" size="25.0" />
          </font></Label>
-      <Label fx:id="score2" layoutX="268.0" layoutY="155.0">
+      <Label fx:id="score2" layoutX="267.0" layoutY="180.0">
          <font>
             <Font name="Mitra Mono" size="25.0" />
          </font></Label>
-      <Label fx:id="score3" layoutX="268.0" layoutY="185.0">
+      <Label fx:id="score3" layoutX="267.0" layoutY="210.0">
          <font>
             <Font name="Mitra Mono" size="25.0" />
          </font></Label>
-      <Label fx:id="score4" layoutX="268.0" layoutY="215.0">
+      <Label fx:id="score4" layoutX="267.0" layoutY="240.0">
          <font>
             <Font name="Mitra Mono" size="25.0" />
          </font></Label>
-      <Label fx:id="score5" layoutX="268.0" layoutY="245.0">
+      <Label fx:id="score5" layoutX="267.0" layoutY="270.0">
          <font>
             <Font name="Mitra Mono" size="25.0" />
          </font></Label>
-      <Label fx:id="score6" layoutX="268.0" layoutY="275.0">
+      <Label fx:id="score6" layoutX="267.0" layoutY="300.0">
          <font>
             <Font name="Mitra Mono" size="25.0" />
          </font></Label>
-      <Label fx:id="score7" layoutX="268.0" layoutY="305.0">
+      <Label fx:id="score7" layoutX="267.0" layoutY="330.0">
          <font>
             <Font name="Mitra Mono" size="25.0" />
          </font></Label>
-      <Label fx:id="score8" layoutX="268.0" layoutY="335.0">
+      <Label fx:id="score8" layoutX="267.0" layoutY="360.0">
          <font>
             <Font name="Mitra Mono" size="25.0" />
          </font></Label>
-      <Label fx:id="score9" layoutX="268.0" layoutY="365.0">
+      <Label fx:id="score9" layoutX="267.0" layoutY="390.0">
          <font>
             <Font name="Mitra Mono" size="25.0" />
          </font></Label>
-      <Label fx:id="score10" layoutX="268.0" layoutY="395.0">
+      <Label fx:id="score10" layoutX="267.0" layoutY="420.0">
          <font>
             <Font name="Mitra Mono" size="25.0" />
          </font></Label>
@@ -124,5 +129,10 @@
           </Menu>
         </menus>
       </MenuBar>
+      <Text layoutX="227.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score" x="40.0">
+         <font>
+            <Font name="Suruma" size="28.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

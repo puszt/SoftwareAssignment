@@ -395,7 +395,7 @@ public class BishopsController {
                 try {
                     onExitToMainMenuAlert(alert);
                 }catch (IOException e){
-                    Logger.debug("Something went wrong");
+                    Logger.debug("Could not exit to Main Menu");
                 }
             }
         }

@@ -9,10 +9,10 @@ import java.io.File;
 public class DatabaseController {
     public static String getUsersHomeDir() {
         String users_home = System.getProperty("user.home");
-        return users_home.replace("\\", "/"); // to support all platforms.
+        return users_home.replace("\\", "/");
     }
     public static void createDatabaseDir(){
-        String myDirectory = ".BishopsDataBase"; // user Folder Name
+        String myDirectory = ".BishopsDataBase";
         String path = getUsersHomeDir() + File.separator + myDirectory ;
 
         if (new File(path).mkdir()) {
@@ -23,7 +23,7 @@ public class DatabaseController {
     }
 
     public static String getDatabaseDirPath(){
-        String myDirectory = ".BishopsDataBase"; // user Folder Name
+        String myDirectory = ".BishopsDataBase";
         String path = getUsersHomeDir() + File.separator + myDirectory ;
         return path;
     }
