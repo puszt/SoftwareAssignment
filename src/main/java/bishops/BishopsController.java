@@ -169,9 +169,9 @@ public class BishopsController {
     }
 
     private void trimModelStates(){
-        while (gameStateCount != modelStates.size()-1){
-            int index = modelStates.size()-1;
-            modelStates.remove(index);
+            while (gameStateCount != modelStates.size()-1){
+                int index = modelStates.size()-1;
+                modelStates.remove(index);
         }
     }
 
@@ -317,6 +317,14 @@ public class BishopsController {
             model.restart();
             modelStates.clear();
             gameStateCount = 0;
+            modelStates.add(model.getPiecePositions());
+            switch (selectionPhase){
+                case SELECT_FROM -> {setSelectablePositions();}
+                case SELECT_TO -> {
+                    deselectSelectedPosition();
+                    alterSelectionPhase();
+                }
+            }
         }
     }
 

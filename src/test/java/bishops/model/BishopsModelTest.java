@@ -42,6 +42,16 @@ class BishopsModelTest {
             new Piece(PieceType.WHITE, new Position(0,2)),
             new Piece(PieceType.WHITE, new Position(0,3))
     );
+    BishopsModel model5 = new BishopsModel(
+            new Piece(PieceType.BLACK, new Position(0,0)),
+            new Piece(PieceType.BLACK, new Position(1,2)),
+            new Piece(PieceType.BLACK, new Position(0,2)),
+            new Piece(PieceType.BLACK, new Position(3,0)),
+            new Piece(PieceType.WHITE, new Position(4,0)),
+            new Piece(PieceType.WHITE, new Position(3,2)),
+            new Piece(PieceType.WHITE, new Position(4,2)),
+            new Piece(PieceType.WHITE, new Position(4,3))
+    );
 
     @Test
     void testConstructor_invalid(){
@@ -130,6 +140,7 @@ class BishopsModelTest {
         assertFalse(model4.isValidMove(6,Directions.UP_RIGHT_ONE));
         assertFalse(model1.isValidMove(0,Directions.DOWN_RIGHT_TWO));
         assertTrue(model1.isValidMove(0,Directions.DOWN_RIGHT_ONE));
+        assertFalse(model5.isValidMove(3, Directions.UP_RIGHT_THREE));
     }
 
     @Test
