@@ -1,6 +1,8 @@
 package bishops.model;
 
 import javafx.beans.property.ObjectProperty;
+import org.tinylog.Logger;
+
 import java.util.Optional;
 
 import java.util.*;
@@ -257,6 +259,7 @@ public class BishopsModel{
                 whiteColumns++;
             }
         }
+        Logger.debug(this);
 
     }
 

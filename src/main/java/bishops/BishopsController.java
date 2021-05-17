@@ -315,8 +315,12 @@ public class BishopsController {
         if (result.get() == ButtonType.OK){
             Logger.debug("Restarting...");
             model.restart();
+            for (var position :model.getPiecePositions()){
+                getSquare(position).getChildren().clear();
+            }
             modelStates.clear();
             gameStateCount = 0;
+            createPieces();
             modelStates.add(model.getPiecePositions());
             switch (selectionPhase){
                 case SELECT_FROM -> {setSelectablePositions();}
